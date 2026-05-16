@@ -1,0 +1,10 @@
+Hanoi is a native Android educational puzzle game that turns Tower of Hanoi into a guided lesson on recursion, binary representation, and algorithmic thinking.
+
+Features:
+- 12 progressive levels across 3-peg and 4-peg variants
+- Tap-to-move puzzle board with legal move validation
+- Binary move counter and post-level insight cards
+- Hint and auto-solver controls
+- Recursion tree explanation overlay
+- Classic Wood and Light visual themes
+- Adaptive launcher icon and splash screen
