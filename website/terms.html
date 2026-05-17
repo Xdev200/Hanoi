@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ==========================================================================
+       HANOI - TERMS OF USE (GOOGLE PLAY COMPLIANT)
+       ========================================================================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Use - Hanoi</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+    <!-- Minimal Legal Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo-group">
+                <div class="logo-icon"></div>
+                <span>Hanoi</span>
+            </a>
+            <a href="index.html" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.5rem 1rem;">Back to Home</a>
+        </div>
+    </header>
+
+    <!-- Main Legal Framework Wrapper -->
+    <main class="legal-container">
+        <article class="legal-card">
+            <div class="legal-header">
+                <h1 style="font-size: 2rem; margin-bottom: 6px;">Terms of Use</h1>
+                <p style="font-size: 0.85rem; color: var(--text-dim);">Last Updated: May 17, 2026</p>
+            </div>
+            
+            <section class="legal-body">
+                <p>Welcome to <strong>Hanoi</strong>. By downloading, installing, or using the Application (registered package identifier: <code>com.hanoi.binaryhanoi</code>), you agree to be bound by these Terms of Use. If you do not agree to these terms, do not install or use the Application.</p>
+                
+                <h2>1. Intellectual Property Rights</h2>
+                <p>All software source codes, designs, visual layout systems, mathematics illustrations, logos, assets, and trademarks associated with Hanoi belong exclusively to the application creator. You are not allowed to copy, modify, distribute, or reverse-engineer the compiled Android packages (APK/AAB) or the web simulation mechanics without express written authorization.</p>
+
+                <h2>2. Permitted License & Use</h2>
+                <p>We grant you a non-transferable, non-exclusive, revocable personal license to install and play Hanoi on your compatible mobile Android devices strictly for personal, non-commercial educational and entertainment purposes.</p>
+
+                <h2>3. User Restrictions</h2>
+                <p>By using this Application, you agree not to:</p>
+                <ul>
+                    <li>Use the Application for any unlawful purposes or in violation of regional regulations.</li>
+                    <li>Attempt to disrupt the integrity of the application's local save file systems.</li>
+                    <li>Re-distribute modified packages of the game on third-party app stores.</li>
+                </ul>
+
+                <h2>4. Disclaimer of Warranties</h2>
+                <p>The Application is provided "AS IS" and "AS AVAILABLE" without warranty of any kind. We do not guarantee that the puzzle solver formulas or visual layouts will fit your exact expectations, nor that the gameplay is completely free of minor visual bugs on all Android OS configurations.</p>
+
+                <h2>5. Limitation of Liability</h2>
+                <p>In no event shall the creator of Hanoi be liable for any direct, indirect, incidental, or consequential damages arising out of your download, installation, or use of the application.</p>
+
+                <h2>6. Termination of Services</h2>
+                <p>We reserve the right to suspend, terminate, or modify access to the application or these Terms of Use at any time without prior notice.</p>
+
+                <h2>7. Contact Information</h2>
+                <p>If you have any feedback or legal inquiries regarding these Terms of Use, please reach out to us at <code>taqnikin@gmail.com</code>.</p>
+            </section>
+        </article>
+    </main>
+
+    <!-- Global Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="logo-group">
+                <div class="logo-icon"></div>
+                <span style="font-size: 1.15rem;">Hanoi</span>
+            </div>
+            
+            <ul class="footer-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#how-to-play">How to Play</a></li>
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="terms.html" style="color: var(--primary-light);">Terms of Use</a></li>
+            </ul>
+            
+            <div class="footer-copy">
+                &copy; <span id="copyright-year">2026</span> Hanoi. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const yearEl = document.getElementById('copyright-year');
+            if (yearEl) yearEl.textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>

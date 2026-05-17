@@ -21,17 +21,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AutoAwesome
 import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material.icons.rounded.Home
-import androidx.compose.material.icons.rounded.Lightbulb
 import androidx.compose.material.icons.rounded.PlayArrow
-import androidx.compose.material.icons.rounded.Refresh
-import androidx.compose.material.icons.rounded.RestartAlt
-import androidx.compose.material.icons.rounded.Undo
 import androidx.compose.material3.Button
-import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -47,7 +40,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.hanoi.binaryhanoi.domain.model.HanoiLevels
@@ -210,67 +202,63 @@ private fun GameScreen(state: AppUiState, viewModel: GameViewModel, palette: Han
     val game = state.game
     LazyColumn(modifier = Modifier.fillMaxSize().padding(16.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
         item {
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+            // Level header with move counter: "Moves: X / Optimal: Y"
+            Row(
+                Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Column {
-                    Text("Level ${game.level.id}", color = palette.text, fontWeight = FontWeight.Bold, fontSize = 20.sp)
-                    Text("${game.level.diskCount} disks · ${game.level.pegCount} pegs", color = palette.muted)
+                    Text(
+                        text = game.level.title,
+                        color = palette.text,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 20.sp
+                    )
+                    Text(
+                        text = "${game.level.diskCount} disks · ${game.level.pegCount} pegs",
+                        color = palette.muted,
+                        fontSize = 13.sp
+                    )
                 }
-                Text("${game.moveCount}/${viewModel.optimalForCurrent()}", color = palette.success, fontWeight = FontWeight.Bold)
+                Column(horizontalAlignment = Alignment.End) {
+                    Text(
+                        text = "Moves",
+                        color = palette.muted,
+                        fontSize = 11.sp
+                    )
+                    Text(
+                        text = "${game.moveCount}",
+                        color = palette.text,
+                        fontWeight = FontWeight.Black,
+                        fontSize = 28.sp
+                    )
+                    Text(
+                        text = "Optimal: ${viewModel.optimalForCurrent()}",
+                        color = palette.success,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
             }
         }
         item { GameBoard(state = game, palette = palette, onPegTap = viewModel::selectPeg) }
-        item { BinaryCounter(game.moveCount, game.level.diskCount, palette) }
-        item { ActionRow(state, viewModel) }
         item {
             AnimatedVisibility(game.isComplete) {
-                InsightCard("Solved", "Move ${game.moveCount} is ${game.moveCount.toString(2)} in binary.", palette)
-            }
-        }
-        item {
-            AnimatedVisibility(game.showRecursion) {
-                RecursionTree(game.level.diskCount, palette)
-            }
-        }
-    }
-}
-
-@Composable
-private fun BinaryCounter(moveCount: Int, diskCount: Int, palette: HanoiPalette) {
-    Surface(shape = RoundedCornerShape(8.dp), color = palette.surface) {
-        Column(Modifier.fillMaxWidth().padding(16.dp)) {
-            Text("Binary counter", fontWeight = FontWeight.Bold, color = palette.text)
-            Spacer(Modifier.height(10.dp))
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                moveCount.toString(2).padStart(diskCount, '0').takeLast(diskCount).forEach { bit ->
-                    Box(Modifier.weight(1f).height(42.dp).clip(RoundedCornerShape(8.dp)).background(if (bit == '1') palette.accent else palette.board), contentAlignment = Alignment.Center) {
-                        Text(bit.toString(), color = if (bit == '1') Color(0xFF10231F) else palette.text, fontWeight = FontWeight.Black)
-                    }
+                val moves = game.moveCount
+                val optimal = viewModel.optimalForCurrent()
+                val label = when {
+                    moves == optimal -> "Perfect solve! Optimal in $moves moves."
+                    moves <= optimal + 2 -> "Great job! Solved in $moves moves (optimal: $optimal)."
+                    else -> "Solved in $moves moves. Optimal is $optimal — try again!"
                 }
+                InsightCard("Puzzle Complete 🎉", label, palette)
             }
         }
     }
 }
 
-@Composable
-private fun ActionRow(state: AppUiState, viewModel: GameViewModel) {
-    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        IconButton(onClick = viewModel::undo, modifier = Modifier.weight(1f)) { Icon(Icons.Rounded.Undo, contentDescription = "Undo") }
-        IconButton(onClick = viewModel::hint, modifier = Modifier.weight(1f)) { Icon(Icons.Rounded.Lightbulb, contentDescription = "Hint") }
-        IconButton(onClick = viewModel::reset, modifier = Modifier.weight(1f)) { Icon(Icons.Rounded.RestartAlt, contentDescription = "Reset") }
-    }
-    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        Button(onClick = viewModel::autoSolve, enabled = !state.game.solverRunning, modifier = Modifier.weight(1f)) {
-            Icon(Icons.Rounded.AutoAwesome, null)
-            Spacer(Modifier.width(8.dp))
-            Text("Auto")
-        }
-        ElevatedButton(onClick = viewModel::toggleRecursion, modifier = Modifier.weight(1f)) {
-            Icon(Icons.Rounded.Refresh, null)
-            Spacer(Modifier.width(8.dp))
-            Text("Tree")
-        }
-    }
-}
+
 
 @Composable
 private fun InsightCard(title: String, body: String, palette: HanoiPalette) {
@@ -283,13 +271,4 @@ private fun InsightCard(title: String, body: String, palette: HanoiPalette) {
     }
 }
 
-@Composable
-private fun RecursionTree(disks: Int, palette: HanoiPalette) {
-    Surface(shape = RoundedCornerShape(8.dp), color = palette.surface) {
-        Column(Modifier.fillMaxWidth().padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-            Text("Recursion tree", color = palette.text, fontWeight = FontWeight.Bold)
-            Text("T($disks) = T(${disks - 1}) + 1 + T(${disks - 1})", color = palette.muted, textAlign = TextAlign.Center)
-            LinearProgressIndicator(progress = { 0.72f }, modifier = Modifier.fillMaxWidth().padding(top = 14.dp), color = palette.accent)
-        }
-    }
-}
+

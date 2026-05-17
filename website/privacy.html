@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ==========================================================================
+       HANOI - PRIVACY POLICY (GOOGLE PLAY COMPLIANT)
+       ========================================================================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Hanoi</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+    <!-- Minimal Legal Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo-group">
+                <div class="logo-icon"></div>
+                <span>Hanoi</span>
+            </a>
+            <a href="index.html" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.5rem 1rem;">Back to Home</a>
+        </div>
+    </header>
+
+    <!-- Main Legal Framework Wrapper -->
+    <main class="legal-container">
+        <article class="legal-card">
+            <div class="legal-header">
+                <h1 style="font-size: 2rem; margin-bottom: 6px;">Privacy Policy</h1>
+                <p style="font-size: 0.85rem; color: var(--text-dim);">Last Updated: May 17, 2026</p>
+            </div>
+            
+            <section class="legal-body">
+                <p>This privacy policy governs your use of the software application <strong>Hanoi</strong> ("Application") for mobile devices, registered under the package identifier <code>com.hanoi.binaryhanoi</code>.</p>
+                
+                <h2>1. Information Collection and Use</h2>
+                <p><strong>Hanoi is built with complete user anonymity in mind:</strong></p>
+                <ul>
+                    <li><strong>No Personal Information:</strong> We do not collect, store, or transmit any personally identifiable information (such as your name, email address, physical location, or device numbers).</li>
+                    <li><strong>Offline Gameplay:</strong> The Application runs 100% locally on your Android device. It does not connect to external servers or make network transmissions to play levels.</li>
+                    <li><strong>Name Customization:</strong> Any customized player name entered in the Play profile card is saved strictly on-device in secure local SQLite/DataStore configurations, and is never uploaded or shared.</li>
+                </ul>
+
+                <h2>2. Third-Party Access</h2>
+                <p>Since the application does not make internet requests or contain analytic tracking SDKs (such as Google Analytics or Firebase Telemetries), no third parties have access to your device configuration or logical gaming habits.</p>
+                
+                <h2>3. Advertising</h2>
+                <p>We believe in an uninterrupted, pure mathematical puzzle environment. The Application does not contain any advertisements, ad trackers, or monetization hooks that would compromise your privacy.</p>
+
+                <h2>4. Children's Privacy</h2>
+                <p>The Application is designed for users of all ages, including children, and strictly complies with the Children's Online Privacy Protection Act (COPPA). We do not collect any personal information from anyone, including children under the age of 13.</p>
+
+                <h2>5. Changes to This Privacy Policy</h2>
+                <p>This Privacy Policy may be updated from time to time for any reason. We will notify you of any changes to our Privacy Policy by posting the new Privacy Policy here and updating the "Last Updated" date above.</p>
+
+                <h2>6. Contact Us</h2>
+                <p>If you have any questions regarding privacy while using the Application, please contact us via email at <code>taqnikin@gmail.com</code>.</p>
+            </section>
+        </article>
+    </main>
+
+    <!-- Global Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="logo-group">
+                <div class="logo-icon"></div>
+                <span style="font-size: 1.15rem;">Hanoi</span>
+            </div>
+            
+            <ul class="footer-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#how-to-play">How to Play</a></li>
+                <li><a href="privacy.html" style="color: var(--primary-light);">Privacy Policy</a></li>
+                <li><a href="terms.html">Terms of Use</a></li>
+            </ul>
+            
+            <div class="footer-copy">
+                &copy; <span id="copyright-year">2026</span> Hanoi. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const yearEl = document.getElementById('copyright-year');
+            if (yearEl) yearEl.textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>

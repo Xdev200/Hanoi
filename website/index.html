@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ==========================================================================
+       HANOI - MAIN INDEX PAGE & SEO MATRIX
+       ========================================================================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hanoi is a premium mathematical puzzle game for Android. Customize pegs and disks, track moves against algorithms, and discover recursive binary insights. Download on Google Play Store.">
+    <meta name="keywords" content="Tower of Hanoi, Hanoi, Android game, puzzle, math puzzle, recursion, logic game, brain trainer">
+    
+    <!-- Open Graph Social Networking Tags -->
+    <meta property="og:title" content="Hanoi - The Ultimate Recursive Brain Challenge">
+    <meta property="og:description" content="An elegant mathematical twist on the classic Tower of Hanoi. Configure peg counts, test your recursive solving speeds, and unlock binary insights.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://play.google.com/store/apps/details?id=com.hanoi.binaryhanoi">
+    
+    <title>Hanoi - The Ultimate Recursive Brain Challenge</title>
+    
+    <!-- Custom Style Sheet Cascades -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+    <!-- Premium Header Navbar -->
+    <header id="main-header">
+        <div class="container nav-container">
+            <div class="logo-group" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+                <div class="logo-icon"></div>
+                <span> Hanoi</span>
+            </div>
+            
+            <button class="menu-toggle" id="mobile-menu-toggle" aria-label="Toggle Navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <ul class="nav-links" id="navigation-links">
+                <li><a href="#hero" class="active">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-to-play">How to Play</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+                <li><a href="terms.html">Terms</a></li>
+                <li>
+                    <a href="https://play.google.com/store/apps/details?id=com.hanoi.binaryhanoi" target="_blank" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Download App</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section / Live Interactive Solver -->
+    <section class="hero-section" id="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <span class="section-subtitle glow-text">The Ultimate Brain Challenge</span>
+                <h1 style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; margin-bottom: var(--space-sm);">
+                    Master Recursion.<br><span style="color: var(--primary);">Solve Hanoi.</span>
+                </h1>
+                <p style="font-size: 1.15rem; margin-bottom: var(--space-md); max-width: 540px;">
+                    Experience a stunning mathematical iteration of the classic Tower of Hanoi. Customize pegs and disks, analyze optimal move algorithms, and track your progress in real-time. Built elegantly for Android.
+                </p>
+                
+                <!-- Custom Google Play Store Acquisition Badge (Vector SVG) -->
+                <a href="https://play.google.com/store/apps/details?id=com.hanoi.binaryhanoi" target="_blank" class="btn-playstore" id="cta-playstore-btn">
+                    <svg class="playstore-icon" viewBox="0 0 512 512" fill="currentColor">
+                        <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58 33.3-60.7-60.7 60.1-60.1 58.6 33.6c24.8 14.2 24.8 37.4 0 53.9zm-86.7 41.2L104.6 499l220.7-126.7 60.2-60.2-60.2-45.3z" fill="url(#playstore-grad)"/>
+                        <defs>
+                            <linearGradient id="playstore-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00f2fe"/>
+                                <stop offset="100%" stop-color="#4facfe"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div class="playstore-text">
+                        <span class="sub">Get it on</span>
+                        <span class="main">Google Play</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="hero-visual">
+                <!-- Hanoi Live Self-Solving Board Component -->
+                <div class="glass-card simulator-container">
+                    <div class="simulator-header">
+                        <span class="sim-badge">Live Solver</span>
+                        <div class="moves-count">
+                            Moves: <strong id="current-moves">0</strong> / <span id="optimal-moves">15</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Dynamic Pegs Board -->
+                    <div class="board-wrapper">
+                        <div class="pegs-row" id="pegs-row">
+                            <!-- Injected dynamically by solver.js -->
+                        </div>
+                        <div class="board-base"></div>
+                    </div>
+                    
+                    <!-- Simulator Interactive Controls -->
+                    <div class="simulator-controls">
+                        <button class="sim-btn" id="sim-play" aria-label="Play or Pause solver">
+                            <!-- Injected dynamically -->
+                        </button>
+                        <button class="sim-btn" id="sim-step" aria-label="Step forward one move">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M6 18l8.5-6L6 6v12zm9-12v12h2V6h-2z"/>
+                            </svg>
+                        </button>
+                        <button class="sim-btn" id="sim-reset" aria-label="Reset simulation">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+                            </svg>
+                        </button>
+                        <button class="sim-btn sim-btn-large" id="sim-speed">1x Speed</button>
+                        
+                        <!-- Disk Depth Select Dropdown -->
+                        <select class="sim-btn" id="disk-count-select" style="width: auto; padding: 0 8px; font-weight: 600; font-size: 0.85rem;" aria-label="Select number of disks">
+                            <option value="3">3 Disks</option>
+                            <option value="4" selected>4 Disks</option>
+                            <option value="5">5 Disks</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Triple Core Features Grid Section -->
+    <section class="section" id="features" style="background: rgba(13, 11, 14, 0.5);">
+        <div class="container">
+            <div class="section-title-group">
+                <span class="section-subtitle">Features</span>
+                <h2 class="section-title">Designed for Logic Seekers</h2>
+                <p style="max-width: 600px; margin: 0 auto;">Hanoi elevates a classic concept to modern standard with beautiful game mechanics.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="glass-card">
+                    <h3 style="font-size: 1.25rem; margin-bottom: var(--space-xs); color: var(--primary-light);">Custom Pegs & Disks</h3>
+                    <p style="font-size: 0.95rem;">Break past traditional boundaries. Test your logical capabilities with levels containing custom disk counts and peg quantities for advanced brain training.</p>
+                </div>
+                
+                <div class="glass-card">
+                    <h3 style="font-size: 1.25rem; margin-bottom: var(--space-xs); color: var(--primary-light);">Mathematical Insights</h3>
+                    <p style="font-size: 0.95rem;">Learn the secret relationship between the binary counting system and Tower of Hanoi move patterns. Demystify recursive logic with integrated guidebooks.</p>
+                </div>
+                
+                <div class="glass-card">
+                    <h3 style="font-size: 1.25rem; margin-bottom: var(--space-xs); color: var(--primary-light);">Dual Design Aesthetics</h3>
+                    <p style="font-size: 0.95rem;">Immerse yourself in premium visual environments. Switch instantly between a rich tactile Classic Wood palette or a modern High-Contrast Light theme.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How To Play & Rules Guide Section -->
+    <section class="section" id="how-to-play">
+        <div class="container" style="max-width: 900px;">
+            <div class="section-title-group">
+                <span class="section-subtitle">Learn the Puzzle</span>
+                <h2 class="section-title">Rules of the Challenge</h2>
+            </div>
+            
+            <div class="glass-card insight-card-group">
+                <div class="insight-item">
+                    <div class="insight-icon">1</div>
+                    <div class="insight-content">
+                        <h4>Move Only the Top Disk</h4>
+                        <p>You can only pick up and move the topmost disk on any peg stack. You cannot slide middle or bottom disks without moving those above them first.</p>
+                    </div>
+                </div>
+                
+                <div class="insight-item">
+                    <div class="insight-icon">2</div>
+                    <div class="insight-content">
+                        <h4>Respect Disk Proportions</h4>
+                        <p>Never place a larger disk on top of a smaller disk. Keeping the sizes ordered is the core mechanism that forces recursive paths.</p>
+                    </div>
+                </div>
+                
+                <div class="insight-item">
+                    <div class="insight-icon">3</div>
+                    <div class="insight-content">
+                        <h4>The Optimal Move Algorithm</h4>
+                        <p>For a game with <em>N</em> disks, the perfect completion requires exactly <strong>2<sup>N</sup> - 1</strong> moves. Challenge yourself to beat your levels in minimum steps!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Premium Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="logo-group">
+                <div class="logo-icon"></div>
+                <span style="font-size: 1.15rem;">Hanoi</span>
+            </div>
+            
+            <ul class="footer-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-to-play">How to Play</a></li>
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="terms.html">Terms of Use</a></li>
+            </ul>
+            
+            <div class="footer-copy">
+                &copy; <span id="copyright-year">2026</span> Hanoi. All rights reserved. Registered package: <code>com.hanoi.binaryhanoi</code>
+            </div>
+        </div>
+    </footer>
+
+    <!-- App Event and Animation Engine Bindings -->
+    <script src="js/app.js"></script>
+    <script src="js/solver.js"></script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+/* ==========================================================================
+   HANOI - BASE DESIGN SYSTEM & TOKENS (base.css)
+   ========================================================================== */
+
+/* Google Fonts Import: Outfit for modern, premium geometric geometric sans-serif */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+    /* Color Palette - Premium Space & Wood Theme */
+    --bg-deep: #0b090c;
+    --bg-gradient: radial-gradient(circle at 50% 30%, #1c1520 0%, #0b090c 70%);
+    --surface-glass: rgba(22, 17, 24, 0.7);
+    --surface-glass-hover: rgba(35, 27, 38, 0.8);
+    
+    /* Brand Accents */
+    --primary: #d4823b;        /* Warm Amber Wood */
+    --primary-light: #e8a05c;  /* Highlight Wood */
+    --primary-dark: #b86520;   /* Deep Cedar */
+    --primary-glow: rgba(212, 130, 59, 0.35);
+    
+    --secondary: #6e4d35;      /* Mahogany */
+    --secondary-glow: rgba(110, 77, 53, 0.2);
+    
+    /* UI States */
+    --success: #2ec4b6;
+    --success-glow: rgba(46, 196, 182, 0.2);
+    --error: #e71d36;
+    
+    /* Text Colors */
+    --text-primary: #f5f2f6;
+    --text-muted: #9f97a3;
+    --text-dim: #6d6571;
+    
+    /* Glassmorphic Borders & Shadows */
+    --border-glass: rgba(255, 255, 255, 0.06);
+    --border-glass-bright: rgba(255, 255, 255, 0.12);
+    --shadow-premium: 0 20px 40px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.05) inset;
+    --shadow-glow: 0 0 30px var(--primary-glow);
+    
+    /* Spacing Scale */
+    --space-xs: 0.5rem;   /* 8px */
+    --space-sm: 1rem;     /* 16px */
+    --space-md: 1.5rem;   /* 24px */
+    --space-lg: 2.5rem;   /* 40px */
+    --space-xl: 4rem;     /* 64px */
+    
+    /* Layout Constants */
+    --max-width: 1200px;
+    --header-height: 80px;
+    
+    /* Border Radii */
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-round: 9999px;
+    
+    /* Transitions */
+    --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-elastic: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Base Reset & Semantic Standard Elements */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg-deep);
+    background-image: var(--bg-gradient);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* Scrollbar Customization for Aesthetic Parity */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-deep);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--surface-glass);
+    border: 2px solid var(--bg-deep);
+    border-radius: var(--radius-round);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+/* Typography Standards */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+}
+
+p {
+    font-weight: 400;
+    color: var(--text-muted);
+}
+
+a {
+    color: var(--primary-light);
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+a:hover {
+    color: var(--text-primary);
+}
+
+img, svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Basic Utilities */
+.container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-sm);
+}
+
+.text-center { text-align: center; }
+.mt-1 { margin-top: var(--space-xs); }
+.mt-2 { margin-top: var(--space-sm); }
+.mt-3 { margin-top: var(--space-md); }
+.mt-4 { margin-top: var(--space-lg); }
+
+.glow-text {
+    text-shadow: 0 0 20px rgba(212, 130, 59, 0.3);
+}

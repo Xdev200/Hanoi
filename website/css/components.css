@@ -1,0 +1,323 @@
+/* ==========================================================================
+   HANOI - UI COMPONENT DESIGNS & STYLING (components.css)
+   ========================================================================== */
+
+/* Glassmorphic Decorative Card Pattern */
+.glass-card {
+    background: var(--surface-glass);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    box-shadow: var(--shadow-premium);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: var(--transition-smooth);
+}
+
+.glass-card:hover {
+    background: var(--surface-glass-hover);
+    border-color: var(--border-glass-bright);
+    transform: translateY(-4px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 255, 255, 0.02);
+}
+
+/* Premium Component Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.6rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    border: none;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    gap: 8px;
+    font-family: inherit;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: var(--text-primary);
+    box-shadow: 0 4px 15px rgba(212, 130, 59, 0.35);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(212, 130, 59, 0.5), var(--shadow-glow);
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    border: 1px solid var(--border-glass);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--border-glass-bright);
+    transform: translateY(-2px);
+}
+
+/* Google Play Store Badge Button */
+.btn-playstore {
+    display: inline-flex;
+    align-items: center;
+    background: #000000;
+    border: 1px solid var(--border-glass-bright);
+    padding: 0.6rem 1.4rem;
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    transition: var(--transition-smooth);
+    cursor: pointer;
+    box-shadow: var(--shadow-premium);
+    gap: 12px;
+}
+
+.btn-playstore:hover {
+    transform: scale(1.03) translateY(-2px);
+    border-color: var(--primary);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8), 0 0 15px rgba(212, 130, 59, 0.2);
+}
+
+.playstore-icon {
+    width: 28px;
+    height: 28px;
+}
+
+.playstore-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.1;
+}
+
+.playstore-text .sub {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.playstore-text .main {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+/* Interactive Self-Solving Hanoi Simulator Board */
+.simulator-container {
+    width: 100%;
+    max-width: 460px;
+    margin: 0 auto;
+}
+
+.simulator-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-sm);
+}
+
+.sim-badge {
+    background: var(--secondary-glow);
+    border: 1px solid var(--border-glass);
+    padding: 4px 10px;
+    border-radius: var(--radius-round);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--primary-light);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.sim-badge::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: var(--success);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--success);
+}
+
+.moves-count {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.moves-count strong {
+    color: var(--primary-light);
+    font-size: 1.1rem;
+}
+
+.board-wrapper {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    background: rgba(18, 14, 20, 0.4);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-md);
+    padding: var(--space-sm) var(--space-sm) 0 var(--space-sm);
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+}
+
+/* Wooden Base */
+.board-base {
+    position: absolute;
+    bottom: 0;
+    left: 2%;
+    width: 96%;
+    height: 20px;
+    background: linear-gradient(to bottom, var(--secondary) 0%, #3e271a 100%);
+    border-radius: 6px 6px 0 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.4);
+    z-index: 10;
+}
+
+/* Pegs layout */
+.pegs-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 5;
+    padding-bottom: 20px; /* offset base */
+}
+
+.peg-column {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: flex-start;
+    width: 30%;
+    height: 140px;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Wooden Peg shafts */
+.peg-shaft {
+    position: absolute;
+    bottom: 0;
+    width: 10px;
+    height: 100%;
+    background: linear-gradient(to right, var(--secondary) 0%, #3e271a 100%);
+    border-radius: var(--radius-round) var(--radius-round) 0 0;
+    box-shadow: inset -1px 0 3px rgba(255,255,255,0.05);
+}
+
+.peg-label {
+    position: absolute;
+    top: -24px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-dim);
+    text-transform: uppercase;
+}
+
+/* Dynamic Disk Styling */
+.disk {
+    height: 20px;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3), 0 1px 0 rgba(255, 255, 255, 0.1) inset;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), bottom 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 20;
+    position: absolute;
+    transform: translateX(-50%);
+    left: 50%;
+}
+
+/* Disk gradient themes based on levels */
+.disk-1 { width: 40px; background: linear-gradient(135deg, #06d6a0 0%, #00b4d8 100%); }
+.disk-2 { width: 60px; background: linear-gradient(135deg, #ffb703 0%, #fb8500 100%); }
+.disk-3 { width: 80px; background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%); }
+.disk-4 { width: 100px; background: linear-gradient(135deg, #3a86c8 0%, #00f2fe 100%); }
+.disk-5 { width: 120px; background: linear-gradient(135deg, #e056fd 0%, #9b51e0 100%); }
+
+/* Simulator Control Keys */
+.simulator-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-top: var(--space-sm);
+}
+
+.sim-btn {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-glass);
+    color: var(--text-primary);
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.sim-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--border-glass-bright);
+    color: var(--primary-light);
+}
+
+.sim-btn-large {
+    width: auto;
+    padding: 0 var(--space-sm);
+    font-weight: 600;
+    font-size: 0.85rem;
+    gap: 6px;
+}
+
+/* Level details cards and insights */
+.insight-card-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.insight-item {
+    display: flex;
+    gap: var(--space-sm);
+    align-items: flex-start;
+}
+
+.insight-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--secondary-glow);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.insight-content h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+}
+
+.insight-content p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}

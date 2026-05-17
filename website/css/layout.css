@@ -1,0 +1,322 @@
+/* ==========================================================================
+   HANOI - LAYOUT & RESPONSIVE GRID SYSTEM (layout.css)
+   ========================================================================== */
+
+/* Glassmorphic Top Navigation Header */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    background: rgba(11, 9, 12, 0.75);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border-bottom: 1px solid var(--border-glass);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    transition: var(--transition-smooth);
+}
+
+header.scrolled {
+    background: rgba(8, 6, 9, 0.9);
+    height: 70px;
+    border-bottom-color: var(--border-glass-bright);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    cursor: pointer;
+}
+
+.logo-icon {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(212, 130, 59, 0.4);
+}
+
+.logo-icon::before {
+    content: "H";
+    font-weight: 900;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    list-style: none;
+}
+
+.nav-links a {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: var(--space-xs) 0;
+    border-bottom: 2px solid transparent;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--text-primary);
+    border-bottom-color: var(--primary);
+}
+
+/* Mobile Menu Toggle button */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.menu-toggle span {
+    width: 24px;
+    height: 2px;
+    background-color: var(--text-primary);
+    transition: var(--transition-smooth);
+}
+
+/* Hero Section Layout */
+.hero-section {
+    padding-top: calc(var(--header-height) + var(--space-xl));
+    padding-bottom: var(--space-xl);
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decorative cosmic glowing backing blobs */
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: 20%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(212, 130, 59, 0.15) 0%, transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--space-lg);
+    align-items: center;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* Main Core Grid Features Section */
+.section {
+    padding: var(--space-xl) 0;
+    position: relative;
+}
+
+.section-title-group {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+
+.section-subtitle {
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--primary);
+    margin-bottom: var(--space-xs);
+}
+
+.section-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin-bottom: var(--space-xs);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+}
+
+/* Legal Page Typography Framework */
+.legal-container {
+    padding-top: calc(var(--header-height) + var(--space-lg));
+    padding-bottom: var(--space-xl);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.legal-card {
+    background: var(--surface-glass);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-premium);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.legal-header {
+    border-bottom: 1px solid var(--border-glass);
+    padding-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.legal-body h2 {
+    font-size: 1.3rem;
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-xs);
+    color: var(--text-primary);
+}
+
+.legal-body p, 
+.legal-body ul {
+    margin-bottom: var(--space-sm);
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.legal-body ul {
+    padding-left: var(--space-md);
+}
+
+.legal-body li {
+    margin-bottom: 4px;
+}
+
+/* Premium Footer */
+footer {
+    border-top: 1px solid var(--border-glass);
+    background: rgba(11, 9, 12, 0.9);
+    padding: var(--space-lg) 0;
+    margin-top: var(--space-xl);
+}
+
+.footer-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+}
+
+.footer-copy {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+}
+
+.footer-links {
+    display: flex;
+    gap: var(--space-md);
+    list-style: none;
+}
+
+.footer-links a {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+    color: var(--text-primary);
+}
+
+/* Responsive Rules & Mobile Adapters */
+@media (max-width: 992px) {
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+        text-align: center;
+    }
+    
+    .hero-content {
+        align-items: center;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        height: 70px;
+    }
+    
+    .menu-toggle {
+        display: flex;
+        z-index: 1100;
+    }
+    
+    /* Responsive slide-down navigation overlay */
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100vh;
+        background: rgba(11, 9, 12, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: var(--space-lg);
+        transition: var(--transition-smooth);
+        border-left: 1px solid var(--border-glass);
+    }
+    
+    .nav-links.active {
+        right: 0;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .footer-grid {
+        flex-direction: column;
+        text-align: center;
+    }
+}
