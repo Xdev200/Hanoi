@@ -1,0 +1,9 @@
+Welcome to the initial release of Hanoi: The Art of Recursion!
+
+In this first public launch, you can:
+• Experience the classic mathematical puzzle reimagined with realistic 3D walnut aesthetics.
+• Solve levels with real-time moves tracking and optimal path calculations.
+• Enjoy fluid touch mechanics designed for native mobile & tablet screens.
+• Ad-free, lightweight, and focused purely on core logic and strategy.
+
+Master the beauty of recursive logic!
