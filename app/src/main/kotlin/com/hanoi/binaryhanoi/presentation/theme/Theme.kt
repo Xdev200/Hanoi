@@ -20,28 +20,48 @@ data class HanoiPalette(
     val diskColors: List<Color>
 )
 
+// Professional, sleek midnight obsidian dark palette for 10-14 year olds
 val ClassicWoodPalette = HanoiPalette(
-    background = Color(0xFF241711),
-    surface = Color(0xFF352319),
-    board = Color(0xFF5D3822),
-    peg = Color(0xFFC48B5A),
-    text = Color(0xFFFFF4DF),
-    muted = Color(0xFFD9BA8A),
-    accent = Color(0xFF76D1BD),
-    success = Color(0xFFFFC85B),
-    diskColors = listOf(Color(0xFFE86F51), Color(0xFF4F8FC0), Color(0xFF6FD0BC), Color(0xFFF5D7A1), Color(0xFFB6763E), Color(0xFF8FBF5B), Color(0xFFCE7BB0), Color(0xFFFFA85D))
+    background = Color(0xFF0B0F19), // Deep midnight obsidian (replaces muddy brown)
+    surface = Color(0xFF131B2E),    // Sleek elevated midnight slate card surface
+    board = Color(0xFF1E293B),      // Chamfered graphite/slate platform
+    peg = Color(0xFF94A3B8),        // Brushed titanium metallic pegs
+    text = Color(0xFFF8FAFC),       // Crisp cool white text
+    muted = Color(0xFF94A3B8),      // Clean slate muted text
+    accent = Color(0xFF22D3EE),     // Electric cyber cyan (engaging for young teens)
+    success = Color(0xFFFBBF24),    // Sunburst golden amber
+    diskColors = listOf(
+        Color(0xFFFF4365), // Electric Coral Red
+        Color(0xFF38BDF8), // Cyber Sky Blue
+        Color(0xFF10B981), // Neon Emerald Green
+        Color(0xFFFBBF24), // Solar Gold
+        Color(0xFFA855F7), // Hyper Violet
+        Color(0xFFFB7185), // Neon Pink
+        Color(0xFF2DD4BF), // Tech Mint Teal
+        Color(0xFFFB923C)  // Radiant Orange
+    )
 )
 
+// Clean, professional, minimalist modern studio light palette for 10-14 year olds
 val LightHanoiPalette = HanoiPalette(
-    background = Color(0xFFF8FAF9),
-    surface = Color.White,
-    board = Color(0xFFE8EFEA),
-    peg = Color(0xFF52615B),
-    text = Color(0xFF1E2A26),
-    muted = Color(0xFF687771),
-    accent = Color(0xFF1D8F7E),
-    success = Color(0xFFC98614),
-    diskColors = listOf(Color(0xFFD95C49), Color(0xFF316FA8), Color(0xFF27A68F), Color(0xFFE5B85F), Color(0xFF8C6848), Color(0xFF6F9E43), Color(0xFFB15592), Color(0xFFDD8434))
+    background = Color(0xFFF8FAFC), // Ultra-clean, crisp slate-50 canvas (replaces pale washed white)
+    surface = Color(0xFFFFFFFF),    // Crisp pure white cards
+    board = Color(0xFFE2E8F0),      // Sleek aluminum/platinum platform
+    peg = Color(0xFF475569),        // Matte gunmetal slate pegs
+    text = Color(0xFF0F172A),       // Rich midnight charcoal text
+    muted = Color(0xFF64748B),      // Slate-500 secondary text
+    accent = Color(0xFF0284C7),     // Electric ocean/sky blue
+    success = Color(0xFFF59E0B),    // Bright amber gold
+    diskColors = listOf(
+        Color(0xFFEF4444), // Vibrant Ruby Red
+        Color(0xFF0284C7), // Vibrant Ocean Blue
+        Color(0xFF059669), // Emerald Green
+        Color(0xFFD97706), // Warm Amber
+        Color(0xFF7C3AED), // Deep Violet
+        Color(0xFFDB2777), // Vivid Magenta
+        Color(0xFF0D9488), // Deep Teal
+        Color(0xFFEA580C)  // Vibrant Tangerine
+    )
 )
 
 @Composable

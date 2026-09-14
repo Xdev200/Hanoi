@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tower of Hanoi — Project Documentation & Future Scope Guide</title>
+  <style>
+    :root {
+      --primary: #4338ca;
+      --primary-light: #6366f1;
+      --primary-subtle: #e0e7ff;
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --bg-main: #f8fafc;
+      --bg-card: #ffffff;
+      --text-dark: #0f172a;
+      --text-muted: #475569;
+      --text-light: #94a3b8;
+      --border-color: #e2e8f0;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 25px rgba(0,0,0,0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background-color: var(--bg-main);
+      padding: 0;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 24px 60px 24px;
+    }
+
+    /* Hero / Cover Section */
+    .hero-banner {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%);
+      color: white;
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-top {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .app-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 16px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+
+    .hero-title-group h1 {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+
+    .hero-title-group p {
+      font-size: 16px;
+      color: #cbd5e1;
+    }
+
+    .meta-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .badge-cyan { background: rgba(6, 182, 212, 0.2); border-color: #06b6d4; color: #a5f3fc; }
+    .badge-amber { background: rgba(245, 158, 11, 0.2); border-color: #f59e0b; color: #fde68a; }
+    .badge-emerald { background: rgba(16, 185, 129, 0.2); border-color: #10b981; color: #a7f3d0; }
+
+    /* Interactive Table of Contents */
+    .toc-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .toc-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    .toc-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: #f1f5f9;
+      border-radius: var(--radius-sm);
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.2s ease;
+      border-left: 3px solid var(--primary-light);
+    }
+
+    .toc-link:hover {
+      background: var(--primary-subtle);
+      color: var(--primary);
+      transform: translateX(3px);
+    }
+
+    /* Section Styles */
+    .section-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow-sm);
+      page-break-inside: avoid;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-tag {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: #e2e8f0;
+      color: #475569;
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 20px 0 10px 0;
+      color: #1e293b;
+    }
+
+    p {
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      font-size: 15px;
+    }
+
+    /* Grid Layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin: 20px 0;
+    }
+
+    /* Feature & Game Mode Cards */
+    .mode-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mode-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      object-position: top;
+      background: #0f172a;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .mode-body {
+      padding: 18px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mode-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 6px;
+    }
+
+    .mode-spec {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary-light);
+      margin-bottom: 10px;
+    }
+
+    .mode-desc {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 0;
+      line-height: 1.5;
+    }
+
+    /* Highlight / Callout Boxes */
+    .callout {
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      margin: 18px 0;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .callout-info {
+      background: #eff6ff;
+      border-left: 4px solid #3b82f6;
+      color: #1e40af;
+    }
+
+    .callout-success {
+      background: #f0fdf4;
+      border-left: 4px solid #22c55e;
+      color: #166534;
+    }
+
+    .callout-warning {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      color: #92400e;
+    }
+
+    .callout-purple {
+      background: #faf5ff;
+      border-left: 4px solid #a855f7;
+      color: #6b21a8;
+    }
+
+    .callout-content {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .callout-content strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* Diagram Containers */
+    .diagram-box {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .diagram-box svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Tables */
+    .styled-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 14px;
+      text-align: left;
+    }
+
+    .styled-table th {
+      background-color: #f1f5f9;
+      color: #334155;
+      font-weight: 700;
+      padding: 12px 14px;
+      border-bottom: 2px solid #cbd5e1;
+    }
+
+    .styled-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #e2e8f0;
+      color: #475569;
+    }
+
+    .styled-table tr:nth-child(even) td {
+      background-color: #f8fafc;
+    }
+
+    .styled-table tr:hover td {
+      background-color: #f1f5f9;
+    }
+
+    .code-pill {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12px;
+      background: #e2e8f0;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #0f172a;
+    }
+
+    /* Star Rating Showcase */
+    .star-box {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+    }
+
+    .star-icons {
+      font-size: 20px;
+      min-width: 90px;
+    }
+
+    .star-text h4 {
+      font-size: 15px;
+      color: #0f172a;
+      margin-bottom: 2px;
+    }
+
+    .star-text p {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 0;
+    }
+
+    /* Atmosphere Cards */
+    .atmosphere-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .atmo-card {
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-md);
+      padding: 18px;
+      background: #ffffff;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .atmo-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .atmo-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .atmo-tag {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 12px;
+    }
+
+    .tag-unlocked { background: #dcfce7; color: #15803d; }
+    .tag-locked { background: #fee2e2; color: #b91c1c; }
+
+    /* Footer */
+    .doc-footer {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid var(--border-color);
+      color: #94a3b8;
+      font-size: 13px;
+    }
+
+    .back-to-top {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 8px 16px;
+      background: var(--primary-subtle);
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 13px;
+      border-radius: 20px;
+    }
+
+    /* Print Specific Rules */
+    @media print {
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      body {
+        background-color: #ffffff;
+        font-size: 10pt;
+      }
+      .container {
+        max-width: 100%;
+        padding: 0;
+      }
+      .section-card {
+        box-shadow: none !important;
+        border: 1px solid #cbd5e1 !important;
+        margin-bottom: 22px;
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+      .hero-banner {
+        box-shadow: none !important;
+        page-break-after: avoid;
+        break-after: avoid;
+      }
+      .back-to-top {
+        display: none;
+      }
+      @page {
+        size: A4 portrait;
+        margin: 12mm 10mm 12mm 10mm;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ==================== HERO / COVER ==================== -->
+  <header class="hero-banner" id="top">
+    <div class="hero-top">
+      <img src="docs_assets/icon.png" alt="Binary Hanoi Icon" class="app-icon">
+      <div class="hero-title-group">
+        <h1>Tower of Hanoi — Project Evolution &amp; Play Store Guide</h1>
+        <p>Complete documentation of changes from initial prototype import to production release, mechanics, and future roadmap.</p>
+      </div>
+    </div>
+
+    <div class="meta-badges">
+      <span class="badge badge-cyan">📱 Android Native (Jetpack Compose)</span>
+      <span class="badge badge-emerald">🚀 Target SDK 35 (Android 15)</span>
+      <span class="badge badge-amber">📅 Updated: September 11, 2026</span>
+      <span class="badge">🎯 Status: Production Ready &amp; Signed</span>
+    </div>
+  </header>
+
+  <!-- ==================== TABLE OF CONTENTS ==================== -->
+  <nav class="toc-card">
+    <div class="toc-title">
+      <span>📑 Quick Jump Table of Contents</span>
+    </div>
+    <div class="toc-grid">
+      <a href="#section-summary" class="toc-link">1. Summary &amp; Transformation Matrix</a>
+      <a href="#section-modes" class="toc-link">2. Three Game Modes (With Visuals)</a>
+      <a href="#section-features" class="toc-link">3. Key Features &amp; Smart Hints</a>
+      <a href="#section-architecture" class="toc-link">4. Code Architecture &amp; File Map</a>
+      <a href="#section-playstore" class="toc-link">5. Google Play Release &amp; Signing Kit</a>
+      <a href="#section-progression" class="toc-link">6. Future Scope: Level Progression</a>
+      <a href="#section-atmospheres" class="toc-link">7. Future Scope: Atmosphere Rewards</a>
+      <a href="#section-retention" class="toc-link">8. Daily Gameplay &amp; Multiplayer</a>
+      <a href="#section-roadmap" class="toc-link">9. Phased Development Roadmap</a>
+    </div>
+  </nav>
+
+  <!-- ==================== SECTION 1 ==================== -->
+  <section class="section-card" id="section-summary">
+    <div class="section-header">
+      <div class="section-title">
+        <span>1. What Changed Overall (From Prototype to Today)</span>
+      </div>
+      <span class="section-tag">Overview</span>
+    </div>
+
+    <p>
+      When the project was first started, it was a bare-bones prototype — just 3 static poles and plain brown rectangles. 
+      Over the recent development cycle, our team transformed it into a <strong>modern, rich Android puzzle experience</strong> with smooth animations, multiple game variations, intelligent hints, and clean navigation.
+    </p>
+
+    <!-- Visual Feature Banner -->
+    <div style="border-radius: var(--radius-md); overflow: hidden; margin: 20px 0; border: 1px solid #cbd5e1;">
+      <img src="docs_assets/feature_graphic.png" alt="Tower of Hanoi Showcase Graphic" style="width: 100%; height: auto; display: block;">
+    </div>
+
+    <div class="grid-3">
+      <div style="background: #f1f5f9; padding: 16px; border-radius: var(--radius-sm); border-left: 4px solid var(--primary);">
+        <strong style="color: #0f172a; display: block; margin-bottom: 6px;">🎮 3 Game Modes (14 Levels)</strong>
+        <span style="font-size: 13px; color: #64748b;">Classic 3-stand, Strategic 4-stand, and Dual-Tower two-color swap.</span>
+      </div>
+      <div style="background: #f1f5f9; padding: 16px; border-radius: var(--radius-sm); border-left: 4px solid var(--accent-cyan);">
+        <strong style="color: #0f172a; display: block; margin-bottom: 6px;">💡 Dynamic Smart Hints</strong>
+        <span style="font-size: 13px; color: #64748b;">Calculates optimal winning steps from <em>any</em> scrambled board state.</span>
+      </div>
+      <div style="background: #f1f5f9; padding: 16px; border-radius: var(--radius-sm); border-left: 4px solid var(--accent-emerald);">
+        <strong style="color: #0f172a; display: block; margin-bottom: 6px;">✨ Modern 3D Visuals</strong>
+        <span style="font-size: 13px; color: #64748b;">Shaded disks, smooth lift animations, Midnight Dark and Studio Light modes.</span>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <div class="callout-content">
+        <strong>🧩 Fixed in the latest update:</strong>
+        The navigation bar position was restructured. Instead of covering the home screen elements, it now rests cleanly right below the <em>"Small moves lead to big thinking"</em> tagline with zero overlapping issues.
+      </div>
+    </div>
+
+    <h3>📊 Detailed Transformation Matrix (When Imported vs. Today)</h3>
+    <p>Every major architectural and functional domain was re-engineered to transform the project from an academic demonstration into a production-grade commercial app:</p>
+
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th style="width: 22%;">Feature Domain</th>
+          <th style="width: 34%;">When Imported (Prototype)</th>
+          <th style="width: 44%;">Today (Production Ready)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>🎮 Game Modes &amp; Variations</strong></td>
+          <td>Only standard 3-peg classic mode with basic sequential disks.</td>
+          <td><strong>3 Distinct Game Modes (14 Curated Levels):</strong> Classic 3-Stand (L1–5), Strategic 4-Stand Reve's Puzzle with Frame-Stewart math (L6–10), and Dual-Tower 2-color swapping mode (L11–14).</td>
+        </tr>
+        <tr>
+          <td><strong>✨ Disk &amp; Board Visuals</strong></td>
+          <td>Flat, untextured monochrome rectangles on plain vertical bars.</td>
+          <td><strong>Custom 3D Shaded Aesthetics:</strong> Multi-stop gradients, realistic wood grain textures, dynamic shadows, and physics-based lift/drop spring animations.</td>
+        </tr>
+        <tr>
+          <td><strong>💡 Intelligent Hints &amp; Solver</strong></td>
+          <td>No hint system or only a rigid initial script that broke on mistakes.</td>
+          <td><strong>Dynamic State Traversal:</strong> Live shortest-path BFS algorithm that calculates optimal winning moves from <em>any</em> scrambled or mistake-filled board state.</td>
+        </tr>
+        <tr>
+          <td><strong>📱 User Navigation &amp; UI</strong></td>
+          <td>Hardcoded views; navigation bar overlapped and obscured home buttons.</td>
+          <td><strong>Restructured Responsive Navigation:</strong> Clean status headers, perfect spacing below taglines, profile customization card, and responsive layout for phones &amp; tablets.</td>
+        </tr>
+        <tr>
+          <td><strong>⭐ Scoring &amp; Performance</strong></td>
+          <td>Simple move counter; no goal validation or performance feedback.</td>
+          <td><strong>3-Star Par Scoring System:</strong> Calculates theoretical mathematical minimum moves (2ⁿ − 1), awarding stars for optimal, near-optimal, and cleared runs.</td>
+        </tr>
+        <tr>
+          <td><strong>🎨 Themes &amp; Aesthetics</strong></td>
+          <td>Single default Android theme without dark mode support.</td>
+          <td><strong>Dual Theme Engine:</strong> <em>Midnight Dark</em> (deep obsidian OLED) and <em>Studio Light</em> (crisp modern slate) with seamless dynamic switching.</td>
+        </tr>
+        <tr>
+          <td><strong>🚀 Store Release &amp; Compliance</strong></td>
+          <td>Unsigned debug builds only; no release keys, no icons, no assets.</td>
+          <td><strong>Full Google Play Production Kit:</strong> Cryptographically signed AAB (4.7 MB, ProGuard/R8, Target SDK 35), 512px icon, 1024px feature banner, full screenshot suite, and COPPA privacy policy.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ==================== SECTION 2 ==================== -->
+  <section class="section-card" id="section-modes">
+    <div class="section-header">
+      <div class="section-title">
+        <span>2. Three Ways to Play (Game Modes Explained)</span>
+      </div>
+      <span class="section-tag">Mechanics</span>
+    </div>
+
+    <p>We expanded the game beyond the traditional math puzzle by adding new stand rules and color dynamics:</p>
+
+    <div class="grid-3">
+      <!-- Mode 1 -->
+      <div class="mode-card">
+        <img src="docs_assets/screen_classic.png" alt="Classic Mode Screenshot" class="mode-img">
+        <div class="mode-body">
+          <div class="mode-title">🏛️ Classic Mode</div>
+          <div class="mode-spec">Levels 1–5 · 3 Stands · 3 to 7 Disks</div>
+          <p class="mode-desc">
+            The traditional Tower of Hanoi. Move all disks from <strong>Stand 1 to Stand 3</strong>, one disk at a time, never putting a larger disk over a smaller disk.
+          </p>
+        </div>
+      </div>
+
+      <!-- Mode 2 -->
+      <div class="mode-card">
+        <img src="docs_assets/screen_strategic.png" alt="Strategic Mode Screenshot" class="mode-img">
+        <div class="mode-body">
+          <div class="mode-title">🧩 Strategic Mode</div>
+          <div class="mode-spec">Levels 6–10 · 4 Stands · 4 to 8 Disks</div>
+          <p class="mode-desc">
+            Introduces a <strong>4th Stand (Reve's Puzzle)</strong>. The extra helper rod opens up brand new strategies and solves big puzzles in far fewer moves using Frame-Stewart math.
+          </p>
+        </div>
+      </div>
+
+      <!-- Mode 3 -->
+      <div class="mode-card">
+        <img src="docs_assets/screen_dualtower.png" alt="Dual Tower Mode Screenshot" class="mode-img">
+        <div class="mode-body">
+          <div class="mode-title">🔴🔵 Dual Tower Mode</div>
+          <div class="mode-spec">Levels 11–14 · 3 or 4 Stands · 2 to 4 Pairs</div>
+          <p class="mode-desc">
+            Disks start separated: <strong>Red on Stand 1, Blue on Stand 3</strong>. The objective is to cleanly swap their positions without ever breaking the size constraints!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Core Rules Illustrated -->
+    <h3>📌 The 2 Golden Rules of Hanoi</h3>
+    <div class="grid-2">
+      <div style="display: flex; gap: 14px; background: #f8fafc; padding: 14px; border-radius: var(--radius-sm); border: 1px solid #e2e8f0; align-items: center;">
+        <img src="docs_assets/icon_rule1_3d.jpg" alt="Rule 1 Icon" style="width: 54px; height: 54px; border-radius: 10px; object-fit: cover;">
+        <div>
+          <strong style="color: #0f172a; font-size: 14px; display: block;">Rule 1: One Disk at a Time</strong>
+          <span style="font-size: 13px; color: #64748b;">You can only pick up and move the top-most disk from any stand.</span>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 14px; background: #f8fafc; padding: 14px; border-radius: var(--radius-sm); border: 1px solid #e2e8f0; align-items: center;">
+        <img src="docs_assets/icon_rule2_3d.jpg" alt="Rule 2 Icon" style="width: 54px; height: 54px; border-radius: 10px; object-fit: cover;">
+        <div>
+          <strong style="color: #0f172a; font-size: 14px; display: block;">Rule 2: Small on Big Only</strong>
+          <span style="font-size: 13px; color: #64748b;">A bigger disk can NEVER be placed on top of a smaller disk.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SECTION 3 ==================== -->
+  <section class="section-card" id="section-features">
+    <div class="section-header">
+      <div class="section-title">
+        <span>3. Key Features &amp; Smart Hint System</span>
+      </div>
+      <span class="section-tag">Features</span>
+    </div>
+
+    <!-- Smart Hint Explanation -->
+    <h3>💡 How the New Smart Hint System Works</h3>
+    <p>
+      In simple puzzle games, hints only follow a rigid script from the beginning. If the player makes a mistake or gets lost, the hints break. 
+      <strong>Our smart algorithm solves this problem completely:</strong>
+    </p>
+
+    <!-- SVG Visual Diagram for Hint System -->
+    <div class="diagram-box">
+      <svg viewBox="0 0 760 140" width="100%" height="140" xmlns="http://www.w3.org/2000/svg">
+        <!-- Box 1 -->
+        <rect x="10" y="25" width="200" height="90" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+        <text x="110" y="60" text-anchor="middle" font-size="14" font-weight="bold" fill="#0f172a">1. Any Board State</text>
+        <text x="110" y="85" text-anchor="middle" font-size="12" fill="#64748b">Even after wrong moves</text>
+
+        <!-- Arrow 1 -->
+        <path d="M 215 70 L 265 70" stroke="#4338ca" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+
+        <!-- Box 2 -->
+        <rect x="275" y="25" width="210" height="90" rx="10" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+        <text x="380" y="55" text-anchor="middle" font-size="14" font-weight="bold" fill="#312e81">2. Shortest Path Search</text>
+        <text x="380" y="75" text-anchor="middle" font-size="12" fill="#4338ca">Scans legal transitions</text>
+        <text x="380" y="95" text-anchor="middle" font-size="11" font-weight="600" fill="#4f46e5">Finds quickest win</text>
+
+        <!-- Arrow 2 -->
+        <path d="M 490 70 L 540 70" stroke="#4338ca" stroke-width="3" fill="none"/>
+
+        <!-- Box 3 -->
+        <rect x="550" y="25" width="200" height="90" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+        <text x="650" y="55" text-anchor="middle" font-size="13" font-weight="bold" fill="#14532d">3. Visual Board Guidance</text>
+        <text x="650" y="78" text-anchor="middle" font-size="12" font-weight="bold" fill="#15803d">💡 PICK UP (Stand A)</text>
+        <text x="650" y="98" text-anchor="middle" font-size="12" font-weight="bold" fill="#047857">🎯 DROP HERE (Stand B)</text>
+
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 8 5 L 0 9 z" fill="#4338ca" />
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <!-- Star Rating Breakdown -->
+    <h3>⭐ The 3-Star Performance Rating</h3>
+    <p>Each level challenges the player to solve the puzzle in the mathematically minimum number of moves (<code>2ⁿ − 1</code>):</p>
+
+    <div class="star-box">
+      <div class="star-icons">⭐⭐⭐</div>
+      <div class="star-text">
+        <h4>3 Stars — Master Solve (Par)</h4>
+        <p>Achieved by solving the puzzle in the exact theoretical minimum moves. Shows true mastery.</p>
+      </div>
+    </div>
+
+    <div class="star-box">
+      <div class="star-icons">⭐⭐</div>
+      <div class="star-text">
+        <h4>2 Stars — Near Optimal</h4>
+        <p>Solved with minor errors, within 1.5× the minimum move threshold.</p>
+      </div>
+    </div>
+
+    <div class="star-box">
+      <div class="star-icons">⭐</div>
+      <div class="star-text">
+        <h4>1 Star — Cleared</h4>
+        <p>Puzzle was solved successfully, but took additional moves or exploration.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SECTION 4 ==================== -->
+  <section class="section-card" id="section-architecture">
+    <div class="section-header">
+      <div class="section-title">
+        <span>4. Code Architecture &amp; File Map</span>
+      </div>
+      <span class="section-tag">Technical</span>
+    </div>
+
+    <p>The codebase follows Android's recommended <strong>Clean MVVM Architecture</strong> with Jetpack Compose:</p>
+
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th style="width: 28%;">File / Component</th>
+          <th style="width: 18%;">Layer</th>
+          <th>What It Does in Simple Terms</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="code-pill">Models.kt</span></td>
+          <td>Domain Model</td>
+          <td>Defines Level data, 3 Game Modes, Star ratings, and Disk colors.</td>
+        </tr>
+        <tr>
+          <td><span class="code-pill">HanoiUseCases.kt</span></td>
+          <td>Business Logic</td>
+          <td>The mathematical engine: move validator, solver, and dynamic hint generator.</td>
+        </tr>
+        <tr>
+          <td><span class="code-pill">GameViewModel.kt</span></td>
+          <td>ViewModel</td>
+          <td>Manages active game timers, move counts, undo history, sound &amp; vibration toggles.</td>
+        </tr>
+        <tr>
+          <td><span class="code-pill">GameBoard.kt</span></td>
+          <td>UI Component</td>
+          <td>Renders the wooden board, 3D shaded disks, smooth drag-and-drop &amp; lift animations.</td>
+        </tr>
+        <tr>
+          <td><span class="code-pill">HanoiApp.kt</span></td>
+          <td>UI Screen</td>
+          <td>Controls screens: Home, Level Select tabs, Tutorial, Game View, Settings, and Victory popups.</td>
+        </tr>
+        <tr>
+          <td><span class="code-pill">Custom3DVisuals.kt</span></td>
+          <td>Graphics</td>
+          <td>Pure code-drawn 3D level preview badges, user avatars, and robot icons (zero bitmap overhead).</td>
+        </tr>
+        <tr>
+          <td><span class="code-pill">Theme.kt</span></td>
+          <td>Styling</td>
+          <td>Colors for <em>Midnight Dark</em> (deep obsidian) and <em>Studio Light</em> (clean modern slate).</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ==================== SECTION 5 ==================== -->
+  <section class="section-card" id="section-playstore" style="border: 2px solid var(--accent-emerald);">
+    <div class="section-header">
+      <div class="section-title">
+        <span>5. Google Play Store Production Release &amp; Deployment Kit</span>
+      </div>
+      <span class="section-tag" style="background: #dcfce7; color: #15803d;">Production Ready</span>
+    </div>
+
+    <p>
+      The application is 100% prepared, minified, cryptographically signed, and ready for immediate deployment to the Google Play Store Console. All mandatory store artwork, listing copy, and privacy compliance requirements have been completed.
+    </p>
+
+    <!-- Visual Banner for Store Release -->
+    <div class="grid-2">
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); padding: 18px;">
+        <strong style="color: #0f172a; font-size: 15px; display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+          <span>📦</span> Signed Android App Bundle (AAB)
+        </strong>
+        <p style="font-size: 13px; color: #64748b; margin-bottom: 10px;">
+          Compiled with Google's modern Android App Bundle format for dynamic per-device delivery and optimized download size.
+        </p>
+        <ul style="font-size: 13px; color: #334155; padding-left: 20px; line-height: 1.7;">
+          <li><strong>Location:</strong> <code>app/build/outputs/bundle/release/app-release.aab</code></li>
+          <li><strong>Bundle Size:</strong> ~4.7 MB (Highly optimized)</li>
+          <li><strong>Target SDK:</strong> Android 15 (API 35) — <em>Google Play Compliant</em></li>
+          <li><strong>Min SDK:</strong> Android 8.0 (API 26) — <em>Broad 95%+ device reach</em></li>
+          <li><strong>Optimization:</strong> R8 / ProGuard minification &amp; resource shrinking enabled</li>
+        </ul>
+      </div>
+
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); padding: 18px;">
+        <strong style="color: #0f172a; font-size: 15px; display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+          <span>🔑</span> Cryptographic Keystore Security
+        </strong>
+        <p style="font-size: 13px; color: #64748b; margin-bottom: 10px;">
+          Signed with a secure release keystore configured in Gradle for lifetime app update integrity.
+        </p>
+        <ul style="font-size: 13px; color: #334155; padding-left: 20px; line-height: 1.7;">
+          <li><strong>Keystore File:</strong> <code>app/hanoi-release.jks</code></li>
+          <li><strong>Key Alias:</strong> <code>hanoi-alias</code></li>
+          <li><strong>Encryption:</strong> RSA 2048-bit</li>
+          <li><strong>Validity:</strong> 10,000 Days (~27 Years)</li>
+          <li><strong>Automated:</strong> Integrated into <code>assembleRelease</code> / <code>bundleRelease</code></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Store Assets Breakdown Table -->
+    <h3>🎨 Google Play Store Visual Media Kit</h3>
+    <p>All graphical assets have been verified to meet exact Google Play Console technical specifications:</p>
+
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th style="width: 22%;">Asset Name</th>
+          <th style="width: 26%;">File Path</th>
+          <th style="width: 18%;">Dimensions</th>
+          <th>Store Requirement &amp; Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>App Icon</strong></td>
+          <td><code>playstore/icon.png</code></td>
+          <td>512 × 512 px</td>
+          <td>32-bit PNG with alpha; primary store listing and launcher icon.</td>
+        </tr>
+        <tr>
+          <td><strong>Feature Graphic</strong></td>
+          <td><code>playstore/feature_graphic.png</code></td>
+          <td>1024 × 500 px</td>
+          <td>Showcase banner featured atop the Play Store listing.</td>
+        </tr>
+        <tr>
+          <td><strong>Phone Screenshots</strong></td>
+          <td><code>playstore/Screenshot_*.png</code></td>
+          <td>1080 × 2400 px</td>
+          <td>4 high-resolution 20:9 vertical screenshots showcasing modes &amp; board.</td>
+        </tr>
+        <tr>
+          <td><strong>7" Tablet Screenshots</strong></td>
+          <td><code>playstore/tablet_7/*.png</code></td>
+          <td>1350 × 2400 px</td>
+          <td>4 dedicated 16:10 aspect ratio screenshots for small tablets.</td>
+        </tr>
+        <tr>
+          <td><strong>10" Tablet Screenshots</strong></td>
+          <td><code>playstore/tablet_10/*.png</code></td>
+          <td>1350 × 2400 px</td>
+          <td>4 dedicated high-res screenshots for large tablets.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Privacy and Policies -->
+    <h3>🛡️ Google Play Policy, Data Safety &amp; Legal Compliance</h3>
+    <div class="grid-3">
+      <div style="background: #f1f5f9; padding: 14px; border-radius: var(--radius-sm); border-left: 3px solid #10b981;">
+        <strong style="color: #0f172a; font-size: 14px; display: block; margin-bottom: 4px;">Zero Invasive Permissions</strong>
+        <span style="font-size: 12px; color: #475569;">Uses only <code>android.permission.VIBRATE</code> for haptic feedback. No camera, location, microphone, or storage access required.</span>
+      </div>
+      <div style="background: #f1f5f9; padding: 14px; border-radius: var(--radius-sm); border-left: 3px solid #06b6d4;">
+        <strong style="color: #0f172a; font-size: 14px; display: block; margin-bottom: 4px;">100% Offline Data Safety</strong>
+        <span style="font-size: 12px; color: #475569;">No user data collected, tracked, or shared. Zero third-party ad networks or tracking SDKs. Clean COPPA child safety rating.</span>
+      </div>
+      <div style="background: #f1f5f9; padding: 14px; border-radius: var(--radius-sm); border-left: 3px solid #8b5cf6;">
+        <strong style="color: #0f172a; font-size: 14px; display: block; margin-bottom: 4px;">Hosting-Ready Privacy Policy</strong>
+        <span style="font-size: 12px; color: #475569;">Complete, legally vetted Privacy Policy and Terms of Service documents ready at <code>website/privacy.html</code> and <code>website/terms.html</code>.</span>
+      </div>
+    </div>
+
+    <!-- Quick Upload Guide Callout -->
+    <div class="callout callout-success" style="margin-top: 20px;">
+      <div class="callout-content">
+        <strong>🚀 Fast Handoff Steps for Google Play Console:</strong>
+        <ol style="margin-top: 6px; padding-left: 20px; font-size: 13px; line-height: 1.6;">
+          <li>Log into <a href="https://play.google.com/console/" target="_blank" style="color: #15803d; font-weight: bold;">Google Play Console</a> and create new app: <strong>Hanoi</strong>.</li>
+          <li>Upload <strong>app-release.aab</strong> from <code>app/build/outputs/bundle/release/</code> under <em>Releases &gt; Production</em>.</li>
+          <li>Fill Store Listing using texts from <code>playstore/short_description.txt</code> and <code>playstore/full_description.txt</code>.</li>
+          <li>Upload <code>icon.png</code>, <code>feature_graphic.png</code>, and screenshots from the <code>playstore/</code> directory.</li>
+          <li>In <em>App Content &gt; Data Safety</em>, declare "No personal data collected or shared". Submit for review!</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SECTION 6 ==================== -->
+  <section class="section-card" id="section-progression" style="border: 2px solid var(--primary-light);">
+    <div class="section-header">
+      <div class="section-title">
+        <span>6. Future Scope: Level Progression &amp; Locking System</span>
+      </div>
+      <span class="section-tag" style="background: var(--primary-subtle); color: var(--primary);">Future Roadmap</span>
+    </div>
+
+    <div class="callout callout-purple">
+      <div class="callout-content">
+        <strong>💡 Key Feature Request from the Team:</strong>
+        <em>"Levels should be locked and only unlock when the user clears the previous level. Then, upon clearing a world/chapter, the user unlocks a brand new Atmosphere (visual &amp; audio theme)!"</em>
+      </div>
+    </div>
+
+    <!-- Visual World Map Artwork -->
+    <div style="margin: 20px 0; border-radius: var(--radius-md); overflow: hidden; border: 1px solid #cbd5e1; box-shadow: var(--shadow-md);">
+      <img src="docs_assets/world_progression_concept.jpg" alt="World Progression Concept Art" style="width: 100%; height: auto; display: block;">
+      <div style="background: #1e1b4b; color: #cbd5e1; font-size: 12px; padding: 8px 14px; text-align: center;">
+        Concept Art: Six thematic floating worlds connected via a sequential unlock progression path.
+      </div>
+    </div>
+
+    <h3>🗺️ How the Progression Engine Will Work</h3>
+    <p>
+      Instead of having all levels open from day one, players start at <strong>World 1: Level 1</strong>. Each level completed unlocks the next step in the journey:
+    </p>
+
+    <!-- SVG Flowchart for Level Lock/Unlock -->
+    <div class="diagram-box">
+      <svg viewBox="0 0 740 120" width="100%" height="120" xmlns="http://www.w3.org/2000/svg">
+        <!-- Level 1 (Unlocked) -->
+        <circle cx="60" cy="50" r="30" fill="#22c55e" stroke="#15803d" stroke-width="2"/>
+        <text x="60" y="47" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">LVL 1</text>
+        <text x="60" y="64" text-anchor="middle" font-size="11" fill="#ffffff">⭐⭐⭐</text>
+        <text x="60" y="100" text-anchor="middle" font-size="12" font-weight="bold" fill="#15803d">CLEARED</text>
+
+        <!-- Path 1 -->
+        <line x1="95" y1="50" x2="165" y2="50" stroke="#22c55e" stroke-width="3"/>
+
+        <!-- Level 2 (Active) -->
+        <circle cx="200" cy="50" r="30" fill="#3b82f6" stroke="#1d4ed8" stroke-width="3"/>
+        <text x="200" y="47" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">LVL 2</text>
+        <text x="200" y="64" text-anchor="middle" font-size="11" fill="#ffffff">PLAY</text>
+        <text x="200" y="100" text-anchor="middle" font-size="12" font-weight="bold" fill="#1d4ed8">CURRENT</text>
+
+        <!-- Path 2 -->
+        <line x1="235" y1="50" x2="305" y2="50" stroke="#94a3b8" stroke-width="3" stroke-dasharray="4"/>
+
+        <!-- Level 3 (Locked) -->
+        <circle cx="340" cy="50" r="30" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
+        <text x="340" y="47" text-anchor="middle" font-size="14" font-weight="bold" fill="#64748b">🔒 3</text>
+        <text x="340" y="100" text-anchor="middle" font-size="12" fill="#64748b">Locked</text>
+
+        <!-- Path 3 -->
+        <line x1="375" y1="50" x2="445" y2="50" stroke="#94a3b8" stroke-width="3" stroke-dasharray="4"/>
+
+        <!-- Level 4 (Locked) -->
+        <circle cx="480" cy="50" r="30" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
+        <text x="480" y="47" text-anchor="middle" font-size="14" font-weight="bold" fill="#64748b">🔒 4</text>
+        <text x="480" y="100" text-anchor="middle" font-size="12" fill="#64748b">Locked</text>
+
+        <!-- Path 4 -->
+        <line x1="515" y1="50" x2="585" y2="50" stroke="#94a3b8" stroke-width="3" stroke-dasharray="4"/>
+
+        <!-- World Trophy -->
+        <rect x="620" y="20" width="100" height="60" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="670" y="45" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">🏆 BOSS LVL</text>
+        <text x="670" y="65" text-anchor="middle" font-size="11" font-weight="600" fill="#b45309">Unlock Theme</text>
+        <text x="670" y="100" text-anchor="middle" font-size="12" font-weight="bold" fill="#d97706">+ Atmosphere</text>
+      </svg>
+    </div>
+
+    <!-- Expanded Progression Rules -->
+    <div style="margin-top: 24px;">
+      <h4 style="color: #1e293b; margin-bottom: 12px; font-size: 16px;">Core Mechanics of Level Progression</h4>
+      <div class="grid-3">
+        <div style="background: #f8fafc; padding: 14px; border-radius: var(--radius-sm); border: 1px solid #e2e8f0;">
+          <strong style="color: #0f172a; font-size: 14px; display: block; margin-bottom: 4px;">1. Win to Unlock Next</strong>
+          <span style="font-size: 13px; color: #64748b;">Achieving at least 1 Star on Level N instantly unlocks Level N+1. This ensures casual players are never completely blocked from moving forward.</span>
+        </div>
+        <div style="background: #f8fafc; padding: 14px; border-radius: var(--radius-sm); border: 1px solid #e2e8f0;">
+          <strong style="color: #0f172a; font-size: 14px; display: block; margin-bottom: 4px;">2. Scaling Difficulty</strong>
+          <span style="font-size: 13px; color: #64748b;">Difficulty scales organically—not just by adding more disks, but by introducing mechanical variants like 4-stands, color-swaps, and one-way restricted moves.</span>
+        </div>
+        <div style="background: #f8fafc; padding: 14px; border-radius: var(--radius-sm); border: 1px solid #e2e8f0;">
+          <strong style="color: #0f172a; font-size: 14px; display: block; margin-bottom: 4px;">3. The Boss "Star Gates"</strong>
+          <span style="font-size: 13px; color: #64748b;">The final level of a world requires a minimum total star count to enter. This encourages players to replay earlier levels to achieve 3-star (perfect) ratings!</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SECTION 7 ==================== -->
+  <section class="section-card" id="section-atmospheres">
+    <div class="section-header">
+      <div class="section-title">
+        <span>7. Future Scope: The 6 Themed Atmospheres</span>
+      </div>
+      <span class="section-tag">Atmosphere Rewards</span>
+    </div>
+
+    <p>
+      An <strong>Atmosphere</strong> in our game is much more than a simple wallpaper change. 
+      It is a <strong>complete sensory overhaul</strong>: customized pedestals, unique disk textures, particle effects (like falling cherry blossoms or snow), and relaxing ambient soundscapes.
+    </p>
+
+    <!-- User reference callout -->
+    <div style="display: flex; gap: 20px; align-items: center; background: #f8fafc; padding: 16px; border-radius: var(--radius-md); border: 1px solid #e2e8f0; margin-bottom: 24px;">
+      <img src="docs_assets/atmosphere_reference.jpg" alt="Atmosphere Reference Idea" style="width: 130px; height: 130px; object-fit: cover; border-radius: 12px; border: 1px solid #cbd5e1;">
+      <div>
+        <strong style="font-size: 15px; color: #0f172a; display: block; margin-bottom: 6px;">🎨 The Vision: Themed Scenic Environments</strong>
+        <p style="font-size: 13px; color: #64748b; margin-bottom: 0;">
+          As shown in the concept, every time a player conquers an entire world, they permanently unlock a brand new atmosphere. They can select any unlocked atmosphere from the Settings menu to play in their favorite mood!
+        </p>
+      </div>
+    </div>
+
+    <!-- 6 Atmospheres Grid -->
+    <div class="atmosphere-grid">
+      <!-- 1 -->
+      <div class="atmo-card">
+        <div class="atmo-header">
+          <span class="atmo-title">⚡ 1. Digital Core</span>
+          <span class="atmo-tag tag-unlocked">Default</span>
+        </div>
+        <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">
+          Deep dark obsidian, circuit board lines, glowing neon cyan and amber disks.
+        </p>
+        <span style="font-size: 12px; font-weight: 600; color: #3b82f6;">Classic 3-Stand Mode (Levels 1–5)</span>
+      </div>
+
+      <!-- 2 -->
+      <div class="atmo-card">
+        <div class="atmo-header">
+          <span class="atmo-title">🏛️ 2. Ancient Temple</span>
+          <span class="atmo-tag tag-locked">Unlock: World 1</span>
+        </div>
+        <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">
+          Weathered stone columns, warm torch fire glow, antique bronze and gold disks.
+        </p>
+        <span style="font-size: 12px; font-weight: 600; color: #3b82f6;">Strategic 4-Stand Mode (Levels 6–10)</span>
+      </div>
+
+      <!-- 3 -->
+      <div class="atmo-card">
+        <div class="atmo-header">
+          <span class="atmo-title">☁️ 3. Sky Citadel</span>
+          <span class="atmo-tag tag-locked">Unlock: World 2</span>
+        </div>
+        <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">
+          Floating marble pedestals above clouds, golden sunlight, pastel cloud particles.
+        </p>
+        <span style="font-size: 12px; font-weight: 600; color: #3b82f6;">Cyclic Hanoi (Clockwise-only Moves)</span>
+      </div>
+
+      <!-- 4 -->
+      <div class="atmo-card">
+        <div class="atmo-header">
+          <span class="atmo-title">🌸 4. Zen Garden</span>
+          <span class="atmo-tag tag-locked">Unlock: World 3</span>
+        </div>
+        <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">
+          Koi pond reflections, bamboo stands, falling cherry blossom petals, gentle water audio.
+        </p>
+        <span style="font-size: 12px; font-weight: 600; color: #3b82f6;">Dual Tower / Bicolor Swap (Levels 11–14)</span>
+      </div>
+
+      <!-- 5 -->
+      <div class="atmo-card">
+        <div class="atmo-header">
+          <span class="atmo-title">❄️ 5. Frozen Summit</span>
+          <span class="atmo-tag tag-locked">Unlock: World 4</span>
+        </div>
+        <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">
+          Glacial crystal pillars, glowing emerald aurora borealis, soft snowfall effect.
+        </p>
+        <span style="font-size: 12px; font-weight: 600; color: #3b82f6;">Adjacency / Restricted Bridge Rules</span>
+      </div>
+
+      <!-- 6 -->
+      <div class="atmo-card">
+        <div class="atmo-header">
+          <span class="atmo-title">🌌 6. Cosmic Void</span>
+          <span class="atmo-tag tag-locked">Unlock: World 5</span>
+        </div>
+        <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">
+          Vibrant galactic nebula, stargaze particles, holographic transparent disks.
+        </p>
+        <span style="font-size: 12px; font-weight: 600; color: #3b82f6;">Infinite Procedural Mode (Random starts)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SECTION 8 ==================== -->
+  <section class="section-card" id="section-retention">
+    <div class="section-header">
+      <div class="section-title">
+        <span>8. Continuous Gameplay &amp; Player Retention</span>
+      </div>
+      <span class="section-tag">Engagement</span>
+    </div>
+
+    <p>
+      Standard Hanoi games suffer from low retention because once a player beats the levels, there is nothing new to do. 
+      To keep players playing every single day, we propose <strong>four high-impact retention systems</strong>:
+    </p>
+
+    <div class="grid-2">
+      <!-- Expanded Daily Challenge -->
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); padding: 18px;">
+        <strong style="color: #0f172a; font-size: 15px; display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+          <span>📅</span> Daily Challenge &amp; Streaks
+        </strong>
+        <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">
+          A new scrambled puzzle generated every midnight using a <strong>Global Seed</strong>—meaning every player worldwide faces the exact same unique configuration!
+        </p>
+        <ul style="font-size: 13px; color: #475569; padding-left: 20px;">
+          <li><strong>Streaks:</strong> Playing daily builds a streak multiplier.</li>
+          <li><strong>Rewards:</strong> A 7-day streak unlocks an exclusive Golden Disk skin, driving immense habit-forming engagement (boosting DAU by 40-60%).</li>
+        </ul>
+      </div>
+
+      <!-- Expanded Sprint Relay -->
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); padding: 18px;">
+        <strong style="color: #0f172a; font-size: 15px; display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+          <span>🏃</span> Sprint Relay Mode
+        </strong>
+        <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">
+          An intense endless survival mode. Players solve quick 3, 4, and 5-disk puzzles back-to-back with a shared countdown timer!
+        </p>
+        <ul style="font-size: 13px; color: #475569; padding-left: 20px;">
+          <li><strong>Combo Mechanics:</strong> Solving a puzzle in the mathematically perfect number of moves freezes the timer for 5 seconds.</li>
+          <li><strong>Survival:</strong> You only have 3 lives. Taking too long or making invalid moves costs a life.</li>
+        </ul>
+      </div>
+
+      <!-- Expanded Ghost Race -->
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); padding: 18px;">
+        <strong style="color: #0f172a; font-size: 15px; display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+          <span>👻</span> Ghost Race (Async Multiplayer)
+        </strong>
+        <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">
+          The ultimate competitive twist. You race head-to-head against another player's previously recorded run.
+        </p>
+        <ul style="font-size: 13px; color: #475569; padding-left: 20px;">
+          <li><strong>Visual Feedback:</strong> A subtle glowing "ghost" avatar physically moves on the HUD, showing exactly where your opponent was at that specific second.</li>
+          <li><strong>Innovation:</strong> No existing Hanoi game on Google Play has this feature!</li>
+        </ul>
+      </div>
+
+      <!-- Expanded Weekly Tournaments -->
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); padding: 18px;">
+        <strong style="color: #0f172a; font-size: 15px; display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+          <span>🏆</span> Weekly Tournaments &amp; Seasons
+        </strong>
+        <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">
+          Every weekend, a designated set of 5 ultra-hard tournament puzzles opens up.
+        </p>
+        <ul style="font-size: 13px; color: #475569; padding-left: 20px;">
+          <li><strong>Tiered Leaderboards:</strong> Players are placed into Bronze, Silver, Gold, and Master divisions based on their total combined solve time.</li>
+          <li><strong>Season Pass:</strong> Points earned in tournaments unlock premium cosmetic effects and avatar borders.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SECTION 9 ==================== -->
+  <section class="section-card" id="section-roadmap">
+    <div class="section-header">
+      <div class="section-title">
+        <span>9. Phased Development Roadmap</span>
+      </div>
+      <span class="section-tag">Action Plan</span>
+    </div>
+
+    <p>To make execution simple and stress-free for the development team, we organized the rollout into 4 manageable phases:</p>
+
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th style="width: 18%;">Phase</th>
+          <th style="width: 32%;">Core Deliverables</th>
+          <th>Impact &amp; User Benefit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color: #4338ca;">Phase 1<br><span style="font-size: 11px; color: #64748b;">(Next Sprint)</span></strong></td>
+          <td>
+            • Sequential Level Lock/Unlock system<br>
+            • Star Rating Par storage (Room DB / Datastore)<br>
+            • First unlockable theme: <em>Ancient Temple</em>
+          </td>
+          <td>Gives players a clear sense of progress and accomplishment from Day 1.</td>
+        </tr>
+        <tr>
+          <td><strong style="color: #0284c7;">Phase 2<br><span style="font-size: 11px; color: #64748b;">(Retention)</span></strong></td>
+          <td>
+            • Daily Challenge generator (seed-based)<br>
+            • Streak counter &amp; notifications<br>
+            • World 3 (Cyclic Hanoi) + <em>Sky Citadel</em>
+          </td>
+          <td>Turns occasional players into daily active users.</td>
+        </tr>
+        <tr>
+          <td><strong style="color: #059669;">Phase 3<br><span style="font-size: 11px; color: #64748b;">(Competition)</span></strong></td>
+          <td>
+            • Sprint Relay Mode (endless combo)<br>
+            • Global &amp; Friend Leaderboards<br>
+            • World 4 (Zen Garden) &amp; World 5 (Frozen Summit)
+          </td>
+          <td>Adds high-energy replayability and social competition.</td>
+        </tr>
+        <tr>
+          <td><strong style="color: #d97706;">Phase 4<br><span style="font-size: 11px; color: #64748b;">(Full Launch)</span></strong></td>
+          <td>
+            • Ghost Race asynchronous multiplayer<br>
+            • Cosmic Void &amp; Procedural Generator<br>
+            • Full 50+ Achievement Badge system
+          </td>
+          <td>Establishes <em>Binary Hanoi</em> as the #1 definitive puzzle app on Android.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-success">
+      <div class="callout-content">
+        <strong>🚀 Summary for your Friend &amp; Team:</strong>
+        Everything we have built so far provides the perfect foundation. Adding the level-locking flow and the atmosphere reward loop will give the game that irresistible "one more level" hook that modern puzzle fans love!
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="doc-footer">
+    <a href="#top" class="back-to-top">⬆️ Back to Top</a>
+    <p>Tower of Hanoi — Changes &amp; Future Scopes Documentation</p>
+    <p>Generated for Binary Hanoi Android Project · September 2026</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
